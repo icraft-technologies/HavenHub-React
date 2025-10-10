@@ -11,15 +11,16 @@ export default function SavingsCalculator() {
     <section className="dark:bg-darkmode">
       <div
         className="container px-4 lg:max-w-screen-xl md:max-w-screen-md mx-auto flex flex-col lg:flex-row gap-16 justify-between items-center"
-        
+        data-aos="fade-left"
       >{/* data-aos="fade-left" */}
         <div className="max-w-37.5 px-0 mb-8 md:mb-0" >
           <h2
             className="text-4xl mb-4 font-bold text-midnight_text dark:text-white"
+            data-aos="fade-left"
           >{/* data-aos="fade-left" */}
             Save Your Money
           </h2>
-          <p className="text-xl text-gray mb-12" >{/* data-aos="fade-left" */}
+          <p className="text-xl text-gray mb-12" data-aos="fade-left">{/* data-aos="fade-left" */}
             Sometimes by accident, sometimes chunks as necessary making this the
             first true generator on the Internet.
           </p>
@@ -29,6 +30,7 @@ export default function SavingsCalculator() {
                 <div
                   className="money-dot relative"
                   data-aos-delay="100"
+                  data-aos="fade-left"
                 >{/* data-aos="fade-left" */}
                   <p className="text-3xl text-midnight_text dark:text-white">
                     3% Save
@@ -38,6 +40,7 @@ export default function SavingsCalculator() {
                 <div
                   className="money-dot relative"
                   data-aos-delay="200"
+                  data-aos="fade-left"
                 >{/* data-aos="fade-left" */}
                   <p className="text-3xl text-midnight_text dark:text-white">
                     5% Save
@@ -47,6 +50,7 @@ export default function SavingsCalculator() {
                 <div
                   className="money-dot relative"
                   data-aos-delay="300"
+                  data-aos="fade-left"
                 >{/* data-aos="fade-left" */}
                   <p className="text-3xl text-midnight_text dark:text-white">
                     8% Save
@@ -56,7 +60,7 @@ export default function SavingsCalculator() {
               </div>
             </div>
           </div>
-          <div>{/* data-aos="fade-up" */}
+          <div data-aos="fade-up">{/* data-aos="fade-up" */}
             <a
               href="/properties/properties-list"
               className="text-xl bg-primary py-3 px-8 text-white rounded-lg me-3 mb-2 border border-primary hover:bg-blue-700"
@@ -71,7 +75,7 @@ export default function SavingsCalculator() {
             </a>
           </div>
         </div>
-        <div className="lg:w-auto w-full" >{/* data-aos="fade-right" */}
+        <div className="lg:w-auto w-full" data-aos="fade-right">{/* data-aos="fade-right" */}
           <div className="bg-primary rounded-t-lg p-16 w-full">
             <p className="text-4xl text-white mb-6 font-bold flex items-center justify-center">
               Savings Calculator

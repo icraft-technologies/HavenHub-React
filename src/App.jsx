@@ -23,8 +23,8 @@ function App() {
   useEffect(() => {
     AOS.init({
       // settings can be adjusted here
-      once: true,
-      duration: 600,
+      once: false,
+      duration: 800,
     })
   }, [])
   return (

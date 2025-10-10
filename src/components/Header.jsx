@@ -1,5 +1,5 @@
 import React from 'react'
-import logoPath from '../assets/media/logo-2.png'
+import logoPath from '/assets/media/logo-2.png'
 
 export default function Header() {
     return (
@@ -17,37 +17,26 @@ export default function Header() {
                     <div className="relative">
                         <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="#">
                             Properties
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-                                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m7 10l5 5l5-5"></path>
-                            </svg>
                         </a>
                     </div>
                     <div className="relative">
                         <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="#">
                             Blogs
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-                                <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m7 10l5 5l5-5"></path>
-                            </svg>
                         </a>
                     </div>
                     <div className="">
                         <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="/contact">
-                            Contact
+                            About Us
                         </a>
                     </div>
                     <div className="">
-                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="/documentation">
-                            Documentation
+                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="/contact">
+                            Contact Us
                         </a>
                     </div>
                 </nav>
 
                 <div className="flex items-center space-x-4">
-                    <button aria-label="Toggle theme" className="flex h-8 w-8 items-center justify-center text-body-color duration-300 dark:text-white">
-                        <svg viewBox="0 0 23 23" className="h-8 w-8 text-dark dark:hidden text-white">
-                            <path d="M16.6111 15.855C17.591 15.1394 18.3151 14.1979 18.7723 13.1623C16.4824 13.4065 14.1342 12.4631 12.6795 10.4711C11.2248 8.47905 11.0409 5.95516 11.9705 3.84818C10.8449 3.9685 9.72768 4.37162 8.74781 5.08719C5.7759 7.25747 5.12529 11.4308 7.29558 14.4028C9.46586 17.3747 13.6392 18.0253 16.6111 15.855Z" />
-                        </svg>
-                    </button>
 
                     <a className="hidden lg:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white" href="/signin">Sign In</a>
                     <a className="hidden lg:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700" href="/signup">Sign Up</a>

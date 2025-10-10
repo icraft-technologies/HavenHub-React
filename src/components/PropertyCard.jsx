@@ -1,7 +1,7 @@
 import React from 'react'
-import bedIcon from '../assets/images/svgs/icon-bed.svg?url'
-import tubIcon from '../assets/images/svgs/icon-tub.svg?url'
-import layoutIcon from '../assets/images/svgs/icon-layout.svg?url'
+import bedIcon from '/assets/images/svgs/icon-bed.svg?url'
+import tubIcon from '/assets/images/svgs/icon-tub.svg?url'
+import layoutIcon from '/assets/images/svgs/icon-layout.svg?url'
 
 const PropertyCard = ({ property, viewMode }) => {
   return (

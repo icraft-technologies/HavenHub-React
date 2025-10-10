@@ -5,6 +5,10 @@ import FeaturedProperties from '../components/FeaturedProperties'
 import Calculator from '../components/SavingsCalculator'
 import Features from '../components/Features'
 import properties from '../data/properties'
+import History from '../components/History'
+import Testimonials from '../components/Testimonials'
+import CompanyInfo from '../components/CompanyInfo'
+import Blog from '../components/Blog'
 
 export default function Home() {
   return (
@@ -14,7 +18,10 @@ export default function Home() {
       <FeaturedProperties properties={properties} viewMode="grid" />
       <Calculator />
       <Features />
-      {/* Featured Properties section */}
+      <History />
+      <Testimonials />
+      <CompanyInfo />
+      <Blog />
     </main>
   )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import apartmentIcon from '../assets/images/property_option/apartment.svg?url'
-import villaIcon from '../assets/images/property_option/villa.svg?url'
-import officeIcon from '../assets/images/property_option/office.svg?url'
-import shopIcon from '../assets/images/property_option/shop.svg?url'
-import houseIcon from '../assets/images/property_option/house.svg?url'
-import warehouseIcon from '../assets/images/property_option/warehouse.svg?url'
+import apartmentIcon from '/assets/images/property_option/apartment.svg?url'
+import villaIcon from '/assets/images/property_option/villa.svg?url'
+import officeIcon from '/assets/images/property_option/office.svg?url'
+import shopIcon from '/assets/images/property_option/shop.svg?url'
+import houseIcon from '/assets/images/property_option/house.svg?url'
+import warehouseIcon from '/assets/images/property_option/warehouse.svg?url'
 
 export default function DiscoverProperties() {
     return (
@@ -20,7 +20,7 @@ export default function DiscoverProperties() {
                             { id: 'house', label: 'House', icon: houseIcon, count: 6 },
                             { id: 'warehouse', label: 'Warehouse', icon: warehouseIcon, count: 1 }
                         ].map((cat, idx) => (
-                            <div key={cat.id} className="image-item block aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
+                            <div key={cat.id} className="image-item block aos-init aos-animate" data-aos="fade-up" data-aos-delay={`${idx * 100}`}>
                                 <a className="group" href="/properties/properties-list">
                                     <img alt={cat.label} loading="lazy" width={85} height={85} decoding="async" data-nimg="1" className="p-4 border-2 rounded-lg border-border dark:border-dark_border mb-6 group-hover:-translate-y-1 group-hover:duration-500" src={cat.icon} style={{ color: 'transparent' }} />
                                     <p className="text-[22px] leading-[1.2] font-semibold mt-2 text-midnight_text text-opacity-80 group-hover:text-opacity-100 dark:text-white dark:group-hover:text-white dark:group-hover:text-opacity-100 dark:text-opacity-70 mb-1 capitalize">{cat.label}</p>

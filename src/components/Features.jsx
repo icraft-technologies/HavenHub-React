@@ -5,46 +5,30 @@ export default function Features() {
     const initialProperties = [
         {
             id: 1,
-            property_img: '/assets/images/properties/tab-1bba5.jpg',
+            property_img: '/assets/images/properties/prop-5.jpg',
             property_price: '$1,200/mo',
             location: 'New York, NY',
             property_title: 'Modern Apartment',
             check: false,
-        },
-        {
-            id: 2,
-            property_img: '/assets/media/tab-2707d.jpg',
-            property_price: '$2,500/mo',
-            location: 'Los Angeles, CA',
-            property_title: 'Spacious Condo',
-            check: false,
-        },
-        {
-            id: 3,
-            property_img: '/assets/media/tab-3ece2.jpg',
-            property_price: '$3,800/mo',
-            location: 'Miami, FL',
-            property_title: 'Beachside Villa',
-            check: true,
         },
     ];
 
     const initialFeatures = [
         {
             id: 1,
-            imgSrc: '/assets/media/vector-smart8434.png',
+            imgSrc: '/assets/images/features/rating.svg',
             title: 'Trusted Agents',
             description: 'Experienced agents help you find the perfect property quickly and safely.',
         },
         {
             id: 2,
-            imgSrc: '/assets/media/logo-2.png',
+            imgSrc: "/assets/images/features/Give-Women's-Rights.svg",
             title: 'Verified Listings',
             description: 'All listings are verified to ensure accurate and up-to-date information.',
         },
         {
             id: 3,
-            imgSrc: '/assets/media/hero-image4fef.png',
+            imgSrc: '/assets/images/features/live-chat.svg',
             title: 'Easy Financing',
             description: 'Flexible financing options tailored to your needs.',
         },
@@ -60,9 +44,9 @@ export default function Features() {
             <div className="container px-4 lg:max-w-screen-xl md:max-w-screen-md mx-auto flex flex-col md:flex-row justify-between items-center">
                 <div className="flex lg:flex-row flex-col lg:gap-0 gap-8 justify-between">
                     <div className='mb-8 md:mb-0 flex-1'>
-                        <div className='relative'> data-aos="fade-right"
+                        <div className='relative'>{/* data-aos="fade-right" */}
                             <img
-                                src="/images/features/features_iimage.jpg"
+                                src="/assets/images/features/features_iimage.jpg"
                                 alt='property'
                                 width={640}
                                 height={615}
