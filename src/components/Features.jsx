@@ -1,44 +1,23 @@
 import React, { useState } from 'react';
 
-export default function Features() {
+export default function Features({ features = [], featureProperties = [] }) {
     // Hardcoded sample data to replace the previous API calls
-    const initialProperties = [
-        {
-            id: 1,
-            property_img: '/assets/images/properties/prop-5.jpg',
-            property_price: '$1,200/mo',
-            location: 'New York, NY',
-            property_title: 'Modern Apartment',
-            check: false,
-        },
-    ];
+    const initialProperties = featureProperties
+        ? Array.isArray(featureProperties)
+            ? featureProperties
+            : [featureProperties]   // ✅ Wrap single object in an array
+        : []
 
-    const initialFeatures = [
-        {
-            id: 1,
-            imgSrc: '/assets/images/features/rating.svg',
-            title: 'Trusted Agents',
-            description: 'Experienced agents help you find the perfect property quickly and safely.',
-        },
-        {
-            id: 2,
-            imgSrc: "/assets/images/features/Give-Women's-Rights.svg",
-            title: 'Verified Listings',
-            description: 'All listings are verified to ensure accurate and up-to-date information.',
-        },
-        {
-            id: 3,
-            imgSrc: '/assets/images/features/live-chat.svg',
-            title: 'Easy Financing',
-            description: 'Flexible financing options tailored to your needs.',
-        },
-    ];
-
-    const [propertiesData] = useState(initialProperties);
+    const initialFeatures = features.length
+        ? features
+        : [];
+    console.log(initialProperties);
+    const [properties] = useState(initialProperties);
     const [pageData] = useState(initialFeatures);
 
-    const value = propertiesData.filter((item) => !item.check);
-
+    const value = properties;
+    // const value = properties.filter((item) => !item.check);
+    console.log(value);
     return (
         <section className='dark:bg-darkmode'>
             <div className="container px-4 lg:max-w-screen-xl md:max-w-screen-md mx-auto flex flex-col md:flex-row justify-between items-center">
