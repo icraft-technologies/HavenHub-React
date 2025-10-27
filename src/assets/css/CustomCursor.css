@@ -77,3 +77,11 @@
         border-color: transparent;
     }
 }
+
+.fill-hover-red{
+	fill: #2F73F2;
+}
+
+.fill-hover-red:hover{
+	fill: red;
+}

@@ -11,13 +11,13 @@ export default function Features({ features = [], featureProperties = [] }) {
     const initialFeatures = features.length
         ? features
         : [];
-    console.log(initialProperties);
+    // console.log(initialProperties);
     const [properties] = useState(initialProperties);
     const [pageData] = useState(initialFeatures);
 
     const value = properties;
     // const value = properties.filter((item) => !item.check);
-    console.log(value);
+    // console.log(value);
     return (
         <section className='dark:bg-darkmode'>
             <div className="container px-4 lg:max-w-screen-xl md:max-w-screen-md mx-auto flex flex-col md:flex-row justify-between items-center">

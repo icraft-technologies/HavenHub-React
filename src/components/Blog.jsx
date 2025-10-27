@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogCard from './blogCard';
+import BlogCard from '../components/shared/blog/BlogCard';
 
 
 const posts = [
@@ -34,7 +34,8 @@ const posts = [
 ]
 
 
-export default function Blog() {
+export default function Blog({ blogs = [] }) {
+  console.log('bloggg', blogs);
   return (
     <section className="flex flex-col dark:bg-darkmode px-4 md:px-4">
         <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-0">
@@ -42,7 +43,7 @@ export default function Blog() {
                 <h2 className=" text-2xl sm:text-4xl text-midnight_text dark:text-white text-center font-bold">Blog Post</h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {posts.map((blog, i) => (
+                {blogs.map((blog, i) => (
                     <div key={i} className="w-full" data-aos="fade-up" data-aos-delay={`${i*200}`} data-aos-duration="1000">
                         <BlogCard blog={blog} />
                     </div>

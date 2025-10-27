@@ -65,7 +65,9 @@ export default function Home() {
         <Testimonials testimonials={pageData.testimonials}/>
       )}
       <CompanyInfo />
-      <Blog />
+      {pageData?.blogs && pageData?.blogs && pageData.blogs.length >= 2 && (
+        <Blog blogs={pageData.blogs}/>
+      )}
     </main>
   )
 }

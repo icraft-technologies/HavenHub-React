@@ -1,45 +1,146 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import logoPath from '/assets/media/logo-2.png'
+import Avatar from '/assets/images/avatar/avatar_1.jpg'
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
+import HeaderLink from "./HeaderLink";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export default function Header() {
+    const navLinks = [
+        { label: "Home", href: "/" },
+        {
+            label: "Properties",
+            href: "/properties",
+            // submenu: [
+            //     { label: "Buy", href: "/properties/buy" },
+            //     { label: "Rent", href: "/properties/rent" },
+            // ],
+        },
+        { label: "Blogs", href: "/blogs" },
+        { label: "About Us", href: "/about" },
+        { label: "Contact Us", href: "/contact" },
+    ];
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [sticky, setSticky] = useState(false);
+
+    const handleScroll = () => {
+        setSticky(window.scrollY >= 80); // 80px scroll triggers sticky
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        const updateUser = () => {
+            const storedUser = localStorage.getItem('user');
+            setUser(storedUser ? JSON.parse(storedUser) : null);
+        };
+
+        updateUser(); // Initialize on mount
+
+        // Listen to custom login event
+        window.addEventListener("login", updateUser);
+
+        // Optional: listen to storage events (works across tabs)
+        window.addEventListener("storage", updateUser);
+
+        return () => {
+            window.removeEventListener("login", updateUser);
+            window.removeEventListener("storage", updateUser);
+        };
+    }, []);
+
+
+    const handleSignOut = async () => {
+        try {
+            const token = localStorage.getItem('token');
+
+            // Call Laravel API to logout
+            await axios.post(
+                `${API_BASE_URL}/logout`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Send token if your API uses Bearer auth
+                    },
+                }
+            );
+
+            // Clear local storage
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            setUser(null);
+
+            // Redirect to Sign In page
+            navigate('/signin');
+        } catch (error) {
+            console.error('Logout error:', error);
+            // Optionally clear local storage anyway
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            setUser(null);
+            navigate('/signin');
+        }
+    };
     return (
-        <header className="fixed h-24 top-0 py-1 z-50 w-full bg-transparent transition-all shadow-lg dark:shadow-darkmd bg-white dark:bg-semidark">
+        <header className={`fixed h-24 top-0 py-1 z-50 w-full transition-all 
+            ${sticky
+                ? "shadow-lg dark:shadow-darkmd bg-white dark:bg-semidark"
+                : "bg-transparent shadow-none"
+            }`}>
             <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md flex items-center justify-between px-4 py-6">
-                <a href="/">
+                <Link to="/">
                     <img alt="logo" loading="lazy" width={160} height={50} decoding="async" className="dark:hidden" style={{ color: 'transparent', width: 'auto', height: 'auto' }} src={logoPath} />
                     <img alt="logo" loading="lazy" width={160} height={50} decoding="async" className="dark:block hidden" style={{ color: 'transparent', width: 'auto', height: 'auto' }} src={logoPath} />
-                </a>
+                </Link>
 
                 <nav className="hidden lg:flex flex-grow items-center justify-center space-x-6">
-                    <div className="">
-                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary !text-primary null" href="/">Home</a>
-                    </div>
-                    <div className="relative">
-                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="#">
-                            Properties
-                        </a>
-                    </div>
-                    <div className="relative">
-                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="#">
-                            Blogs
-                        </a>
-                    </div>
-                    <div className="">
-                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="/contact">
-                            About Us
-                        </a>
-                    </div>
-                    <div className="">
-                        <a className="text-base flex py-3 font-normal text-midnight_text hover:text-primary dark:text-white dark:hover:text-primary  text-black dark:text-white  null" href="/contact">
-                            Contact Us
-                        </a>
-                    </div>
+                    {navLinks.map((item, index) => (
+                        <HeaderLink key={index} item={item} />
+                    ))}
                 </nav>
 
                 <div className="flex items-center space-x-4">
 
-                    <a className="hidden lg:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white" href="/signin">Sign In</a>
-                    <a className="hidden lg:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700" href="/signup">Sign Up</a>
+                    {user ? (
+                        <>
+                            {/* User Avatar */}
+                            <div className="relative group">
+                                <img
+                                    src={Avatar} // Replace with user avatar if available
+                                    alt="avatar"
+                                    className="w-9 h-9 rounded-full"
+                                />
+                                <p className="absolute w-fit text-sm font-medium text-center z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 bg-primary text-white py-1 px-2 rounded-lg shadow-2xl top-full left-1/2 transform -translate-x-1/2 mt-3">
+                                    {user.name || user.email}
+                                </p>
+                            </div>
+
+                            {/* Sign Out Button */}
+                            <button
+                                onClick={handleSignOut}
+                                className="hidden lg:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white"
+                            >
+                                Sign Out
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link className="hidden lg:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white" to="/signin">
+                                Sign In
+                            </Link>
+                            <Link className="hidden lg:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700" to="/signup">
+                                Sign Up
+                            </Link>
+                        </>
+                    )}
 
                     <button className="block lg:hidden p-2 rounded-lg" aria-label="Toggle mobile menu">
                         <span className="block w-6 h-0.5 bg-black dark:bg-white"></span>
@@ -60,8 +161,8 @@ export default function Header() {
                     </div>
                     <nav className="flex flex-col items-start p-4">
                         <div className="mt-4 flex flex-col space-y-4 w-full">
-                            <a className="bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white" href="/signin">Sign In</a>
-                            <a className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700" href="/signup">Sign Up</a>
+                            <Link className="bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white" href="/signin">Sign In</Link>
+                            <Link className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700" href="/signup">Sign Up</Link>
                         </div>
                     </nav>
                 </div>

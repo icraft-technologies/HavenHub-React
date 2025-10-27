@@ -69,13 +69,13 @@ export default function Testimonials( { testimonials = [] }) {
         <div className="flex justify-between w-full">
           {/* LEFT SIDE */}
           <CustomCursor />
-          <div className="flex-1 lg:block hidden relative section-1" style={{'margin-left': '0px', 'margin-right': '40px', 'z-index': '3'}} data-aos="fade-right">
+          <div className="flex-1 lg:block hidden relative section-1" style={{marginLeft: '0px', marginRight: '40px', zIndex: '3'}} data-aos="fade-right">
             <div
               className="relative mx-auto flex items-center justify-center"
               style={{ width: containerSize, height: containerSize }}
             >
               {/* Static concentric circles */}
-              <dev className="full-circle"/>
+              <div className="full-circle"> </div>
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div
                   style={{
