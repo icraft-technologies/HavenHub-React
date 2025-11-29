@@ -113,15 +113,28 @@ export default function Header() {
                         <>
                             {/* User Avatar */}
                             <div className="relative group">
+                                {/* Avatar */}
                                 <img
-                                    src={Avatar} // Replace with user avatar if available
+                                    src={user.profile_photo ?? Avatar}
                                     alt="avatar"
-                                    className="w-9 h-9 rounded-full"
+                                    className="w-9 h-9 rounded-full cursor-pointer"
                                 />
-                                <p className="absolute w-fit text-sm font-medium text-center z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 bg-primary text-white py-1 px-2 rounded-lg shadow-2xl top-full left-1/2 transform -translate-x-1/2 mt-3">
-                                    {user.name || user.email}
-                                </p>
+
+                                {/* Dropdown menu */}
+                                <div
+                                    className="absolute invisible opacity-0 group-hover:visible group-hover:opacity-100 
+                                        transition-all duration-200 bg-white text-black dark:bg-darkmode 
+                                        shadow-lg rounded-lg py-2 w-40 top-full right-0 mt-3 z-50"
+                                >
+                                    <Link
+                                        to="/profile"
+                                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    >
+                                        Profile
+                                    </Link>
+                                </div>
                             </div>
+
 
                             {/* Sign Out Button */}
                             <button

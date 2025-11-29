@@ -5,6 +5,7 @@ import './assets/css/ef3ce000ff06104d.css';
 import './assets/css/fab660058e0ab945.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Toaster, toast } from "react-hot-toast";
 
 // import js files
 import './assets/chunks/4bd1b696-2a15fa4e2a753923.js';
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false} />
       <Header />
 
       <AppRoutes />

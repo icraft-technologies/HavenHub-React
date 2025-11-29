@@ -9,15 +9,21 @@ import History from '../components/History'
 import Testimonials from '../components/Testimonials'
 import CompanyInfo from '../components/CompanyInfo'
 import Blog from '../components/Blog'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Home() {
 
   const [properties, setProperties] = useState([])   // State to hold API data
   const [pageData, setPageData] = useState(null)
   const [loading, setLoading] = useState(true)       // Optional: loading state
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('http://havenhub.test/api/properties')     // Call your API
+    fetch(`${API_BASE_URL}/properties`, {
+      headers: token
+      ? { Authorization: `Bearer ${token}` }
+      : {}
+    })     // Call your API
       .then((response) => response.json())
       .then((data) => {
         setProperties(data)                           // Set API response
@@ -30,7 +36,11 @@ export default function Home() {
   }, [])
   // Fetch page data
   useEffect(() => {
-    fetch('http://havenhub.test/api/pagedata')
+    fetch(`${API_BASE_URL}/pagedata`, {
+      headers: token
+      ? { Authorization: `Bearer ${token}` }
+      : {}
+    })
       .then((response) => response.json())
       .then((data) => {
         setPageData(data)

@@ -82,6 +82,6 @@
 	fill: #2F73F2;
 }
 
-.fill-hover-red:hover{
+.fill-hover-red:hover , .fill-red{
 	fill: red;
 }

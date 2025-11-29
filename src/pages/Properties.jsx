@@ -7,18 +7,33 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export default function Properties({ category }) {
     const [properties, setProperties] = useState([]);
     const [searchData, setSearchData] = useState([]);
-    const [filters, setFilters] = useState({});
+    const [filters, setFilters] = useState({
+        keyword: "",
+        location: "",
+        beds: "",
+        garages: "",
+    });
+
     const [price, setPrice] = useState(50);
     const [price1, setPrice1] = useState(50);
     const [sortOrder, setSortOrder] = useState("none");
     const [viewMode, setViewMode] = useState('grid');
     const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/pagedata`);
-                const propertiesData = await fetch(`${API_BASE_URL}/properties`);
+                const res = await fetch(`${API_BASE_URL}/pagedata`, {
+                    headers: token
+                        ? { Authorization: `Bearer ${token}` }
+                        : {}
+                });
+                const propertiesData = await fetch(`${API_BASE_URL}/properties`, {
+                    headers: token
+                        ? { Authorization: `Bearer ${token}` }
+                        : {}
+                });
                 if (!res.ok) throw new Error('Failed to fetch');
                 const data = await res.json();
                 const pdata = await propertiesData.json();
@@ -35,6 +50,9 @@ export default function Properties({ category }) {
     const handleFilterChange = (key, value) => {
         setFilters(prev => ({ ...prev, [key]: value }));
     };
+    const handleSelectChange = (key, value) => {
+        setFilters(prev => ({ ...prev, [key]: value }));
+    };
 
     const handlePriceChange = e => setPrice(Number(e.target.value));
     const handlePriceChange1 = e => setPrice1(Number(e.target.value));
@@ -44,9 +62,22 @@ export default function Properties({ category }) {
 
     const filteredProperties = properties.filter(p => {
         let match = true;
-        if (category) match = normalize(p.category) === normalize(category);
-        if (filters.keyword) match = match && p.title?.toLowerCase().includes(filters.keyword.toLowerCase());
-        if (filters.location) match = match && p.location === filters.location;
+
+        if (filters.category)
+            match = p.category === filters.category;
+
+        if (filters.keyword)
+            match = match && p.property_title?.toLowerCase().includes(filters.keyword.toLowerCase());
+
+        if (filters.location)
+            match = match && p.location === filters.location;
+
+        if (filters.beds)
+            match = match && Number(p.beds) === Number(filters.beds);
+
+        if (filters.garages)
+            match = match && Number(p.garages) === Number(filters.garages);
+
         return match;
     });
 
