@@ -16,10 +16,10 @@ export default function DiscoverProperties({ propetyTypes = [] }) {
                     {propetyTypes.length > 0 ? (
                         propetyTypes.map((cat, idx) => (
                             <div key={cat.id} className="image-item block aos-init aos-animate" data-aos="fade-up" data-aos-delay={`${idx * 100}`}>
-                                <a className="group" href="/properties/properties-list">
-                                    <img alt={cat.name} loading="lazy" width={85} height={85} decoding="async" data-nimg="1" className="p-4 border-2 rounded-lg border-border dark:border-dark_border mb-6 group-hover:-translate-y-1 group-hover:duration-500" src={`/assets/images/property_option/${cat.icon}`} style={{ color: 'transparent' }} />
+                                <a className="group" href="/properties">
+                                    <img alt={cat.name} loading="lazy" width={85} height={85} decoding="async" data-nimg="1" className="p-4 border-2 rounded-lg border-border dark:border-dark_border mb-6 group-hover:-translate-y-1 group-hover:duration-500" src={cat.icon} style={{ color: 'transparent' }} />
                                     <p className="text-[22px] leading-[1.2] font-semibold mt-2 text-midnight_text text-opacity-80 group-hover:text-opacity-100 dark:text-white dark:group-hover:text-white dark:group-hover:text-opacity-100 dark:text-opacity-70 mb-1 capitalize">{cat.name}</p>
-                                    <p className="text-base text-gray">{cat.description}</p>
+                                    <p className="text-base text-gray">{cat.count} Properties</p>
                                 </a>
                             </div>
                         ))

@@ -1,15 +1,53 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import bedIcon from '/assets/images/svgs/icon-bed.svg?url'
 import tubIcon from '/assets/images/svgs/icon-tub.svg?url'
 import layoutIcon from '/assets/images/svgs/icon-layout.svg?url'
+import axios from 'axios'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import toast from 'react-hot-toast'; 
 
 const PropertyCard = ({ property, viewMode }) => {
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  useEffect(() => {
+    if (property?.wishlist) {
+      setIsWishlisted(true);
+    } else {
+      setIsWishlisted(false);
+    }
+  }, [property]);
+  const handleWishlist = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error('Please login to add to wishlist');
+        return;
+      }
+      const response = await axios.post(
+        `${API_BASE_URL}/wishlist/toggle`,
+        { property_id: property.id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const added = response.data.added;
+      setIsWishlisted(added);
+      if (added) {
+        toast.success('Added to wishlist ❤️');
+      } else {
+        toast('Removed from wishlist 💔');
+      }
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
+    }
+  };
+
   return (
     <div
       key={property?.id}
-      className={`bg-white shadow-property dark:bg-darklight rounded-lg overflow-hidden aos-init aos-animate`}
+      className={`bg-white shadow-property dark:bg-darklight rounded-lg overflow-hidden aos-init`}
+      data-aos="fade-up"
     >
-      <a href={`/properties/properties-list/${property?.slug}`} className={`group false ${viewMode == 'list' ? 'flex' : ''}`}>
+      <a href={`/properties/${property?.slug}`} className={`group false ${viewMode == 'list' ? 'flex' : ''}`}>
         <div className={`relative false ${viewMode == 'list' ? 'w-[30%]' : ''}`}>
           <div className={`imageContainer h-[250px] w-full ${viewMode == 'list' ? 'h-full md:h-52' : ''}`}>
             <img
@@ -24,8 +62,9 @@ const PropertyCard = ({ property, viewMode }) => {
             {property?.tag}
           </p>
           <svg
+            onClick={handleWishlist}
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute top-[10px] right-[10px] bg-white p-2 rounded-lg fill-hover-red"
+            className={`absolute top-[10px] right-[10px] bg-white p-2 rounded-lg ${isWishlisted ? 'fill-red' : 'fill-hover-red'}`}
             viewBox="0 0 24 24"
             width="38"
             height="38"

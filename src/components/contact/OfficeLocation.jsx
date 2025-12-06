@@ -1,6 +1,6 @@
 import React from "react";
 
-const Location = () => {
+const Location = ({contact=null}) => {
   const breadcrumbLinks = [
     { href: "/", text: "Home" },
     { href: "/contact", text: "Contact" },
@@ -20,22 +20,22 @@ const Location = () => {
               </div>
               <div className="col-span-3">
                 <p className="text-xl text-IceBlue font-normal max-w-64 text-white text-opacity-50">
-                  4292 Mapleview Drive Greenfield Zip code 38230
+                  {contact?.address}
                 </p>
               </div>
               <div className="col-span-3">
                 <a
-                  href="mailto:headoffice@property.com"
+                  href={`mailto:${contact?.email}`}
                   className="text-xl text-white font-medium underline block"
                 >
-                  headoffice@property.com
+                  {contact?.email}
                 </a>
                 <a
-                  href="tel:731-621-5503"
+                  href={`tel:${contact?.phone}`}
                   className="text-xl text-white text-opacity-80 flex items-center gap-2 hover:text-opacity-100 w-fit"
                 >
                   <span className="text-white !text-opacity-40">Call</span>
-                  731-621-5503
+                  {contact?.phone}
                 </a>
               </div>
             </div>
